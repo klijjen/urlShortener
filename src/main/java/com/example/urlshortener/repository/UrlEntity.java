@@ -26,6 +26,9 @@ public class UrlEntity {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @Column
+    private LocalDateTime expiresAt;
+
     public UrlEntity() {
         this.id = Utils.getRandomUUID();
         this.createdAt = LocalDateTime.now();
