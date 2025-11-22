@@ -13,13 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import static com.example.urlshortener.Utils.getRandomUUID;
+import static com.example.urlshortener.Utils.isValidUrl;
 
 @Service
 public class UrlServiceImpl implements UrlService {
     private final static Logger logger = LoggerFactory.getLogger(UrlServiceImpl.class);
     private static final int MAX_URL_LENGTH = 2048;
-
-    private final UrlValidator urlValidator;
     private final UrlRepository urlRepository;
     private final UrlShortenerConfig config;
 
@@ -30,7 +29,6 @@ public class UrlServiceImpl implements UrlService {
     public UrlServiceImpl(UrlRepository urlRepository, UrlShortenerConfig config) {
         this.urlRepository = urlRepository;
         this.config = config;
-        this.urlValidator = new UrlValidator(new String[]{"http", "https", "ftp"});
 
         logger.info("Сервис сокращения URL сконфигурирован.");
     }
@@ -120,7 +118,7 @@ public class UrlServiceImpl implements UrlService {
             throw new IllegalArgumentException("Длина URL превышает максимальный лимит в 2048 символов");
         }
 
-        if (!urlValidator.isValid(url)) {
+        if (!isValidUrl(url)) {
             throw new IllegalArgumentException("Неверный формат URL: " + url);
         }
 
