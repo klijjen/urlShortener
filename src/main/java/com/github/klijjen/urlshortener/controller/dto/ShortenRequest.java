@@ -1,4 +1,4 @@
-package com.example.urlshortener.controller.dto;
+package com.github.klijjen.urlshortener.controller.dto;
 
 import jakarta.validation.constraints.*;
 

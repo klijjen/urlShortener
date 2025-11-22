@@ -1,4 +1,4 @@
-package com.example.urlshortener;
+package com.github.klijjen.urlshortener;
 
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -1,8 +1,8 @@
-package com.example.urlshortener.service;
+package com.github.klijjen.urlshortener.service;
 
-import com.example.urlshortener.config.UrlShortenerConfig;
-import com.example.urlshortener.repository.UrlEntity;
-import com.example.urlshortener.repository.UrlRepository;
+import com.github.klijjen.urlshortener.config.UrlShortenerConfig;
+import com.github.klijjen.urlshortener.repository.UrlEntity;
+import com.github.klijjen.urlshortener.repository.UrlRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.example.urlshortener.Utils.getRandomUUID;
-import static com.example.urlshortener.Utils.isValidUrl;
+import static com.github.klijjen.urlshortener.Utils.getRandomUUID;
+import static com.github.klijjen.urlshortener.Utils.isValidUrl;
 
 @Service
 public class UrlServiceImpl implements UrlService {

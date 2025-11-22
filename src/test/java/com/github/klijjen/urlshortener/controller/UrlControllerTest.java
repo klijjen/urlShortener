@@ -1,7 +1,7 @@
-package com.example.urlshortener.controller;
+package com.github.klijjen.urlshortener.controller;
 
-import com.example.urlshortener.controller.dto.ShortenRequest;
-import com.example.urlshortener.service.UrlService;
+import com.github.klijjen.urlshortener.controller.dto.ShortenRequest;
+import com.github.klijjen.urlshortener.service.UrlService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

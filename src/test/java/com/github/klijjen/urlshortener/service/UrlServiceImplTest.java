@@ -1,8 +1,8 @@
-package com.example.urlshortener.service;
+package com.github.klijjen.urlshortener.service;
 
-import com.example.urlshortener.config.UrlShortenerConfig;
-import com.example.urlshortener.repository.UrlEntity;
-import com.example.urlshortener.repository.UrlRepository;
+import com.github.klijjen.urlshortener.config.UrlShortenerConfig;
+import com.github.klijjen.urlshortener.repository.UrlEntity;
+import com.github.klijjen.urlshortener.repository.UrlRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

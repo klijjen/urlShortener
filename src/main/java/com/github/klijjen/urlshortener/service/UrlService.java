@@ -1,4 +1,4 @@
-package com.example.urlshortener.service;
+package com.github.klijjen.urlshortener.service;
 
 import java.util.Optional;
 

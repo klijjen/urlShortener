@@ -1,6 +1,6 @@
-package com.example.urlshortener.repository;
+package com.github.klijjen.urlshortener.repository;
 
-import com.example.urlshortener.Utils;
+import com.github.klijjen.urlshortener.Utils;
 
 import jakarta.persistence.*;
 
