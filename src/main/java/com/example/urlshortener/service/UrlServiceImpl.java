@@ -17,7 +17,6 @@ import static com.example.urlshortener.Utils.getRandomUUID;
 @Service
 public class UrlServiceImpl implements UrlService {
     private final static Logger logger = LoggerFactory.getLogger(UrlServiceImpl.class);
-    private static final int MAX_GENERATION_ATTEMPTS = 10;
     private static final int MAX_URL_LENGTH = 2048;
 
     private final UrlValidator urlValidator;
@@ -77,7 +76,7 @@ public class UrlServiceImpl implements UrlService {
     private String generateUniqueShortCode(int desiredLength) {
         int attempts = 0;
 
-        while (attempts < MAX_GENERATION_ATTEMPTS) {
+        while (attempts < config.getMaxAttempts()) {
             String uuid = getRandomUUID().toString().replace("-", "");
             String shortCode = uuid.substring(0, desiredLength);
 
@@ -86,10 +85,10 @@ public class UrlServiceImpl implements UrlService {
                 return shortCode;
             }
             attempts++;
-            logger.warn("Обнаружена коллизия короткого кода, попытка {}/{}", attempts, MAX_GENERATION_ATTEMPTS);
+            logger.warn("Обнаружена коллизия короткого кода, попытка {}/{}", attempts, config.getMaxAttempts());
         }
-        logger.error("Не удалось сгенерировать уникальный короткий код после {} попыток", MAX_GENERATION_ATTEMPTS);
-        throw new IllegalStateException("Не удалось сгенерировать уникальный короткий код после " + MAX_GENERATION_ATTEMPTS + " попыток");
+        logger.error("Не удалось сгенерировать уникальный короткий код после {} попыток", config.getMaxAttempts());
+        throw new IllegalStateException("Не удалось сгенерировать уникальный короткий код после " + config.getMaxAttempts() + " попыток");
     }
 
     private void validateLength(int length) {

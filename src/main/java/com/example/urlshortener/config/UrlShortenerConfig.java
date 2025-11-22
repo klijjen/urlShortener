@@ -10,6 +10,7 @@ public class UrlShortenerConfig {
     private int minLength = 4;
     private int defaultLength = 6;
     private int maxLength = 12;
+    private int maxAttempts = 10;
 
     public int getMinLength() {
         return minLength;
@@ -33,5 +34,13 @@ public class UrlShortenerConfig {
 
     public int getMaxLength() {
         return maxLength;
+    }
+
+    public int getMaxAttempts() {
+        return maxAttempts;
+    }
+
+    public void setMaxAttempts(int maxAttempts) {
+        this.maxAttempts = maxAttempts;
     }
 }
