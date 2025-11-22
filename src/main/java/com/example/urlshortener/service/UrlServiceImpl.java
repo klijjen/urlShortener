@@ -49,7 +49,7 @@ public class UrlServiceImpl implements UrlService {
 
         Optional<UrlEntity> existingUrl = urlRepository.findByOriginalUrl(originalUrl);
         if (existingUrl.isPresent()) {
-            logger.debug("URL уже был сокращен ранее: {}", originalUrl);
+            logger.info("URL уже был сокращен ранее: {}", originalUrl);
             return buildShortUrl(existingUrl.get().getShortCode());
         }
 
@@ -63,17 +63,25 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public Optional<String> getOriginalUrl(String shortCode) {
-        logger.debug("Поиск оригинального URL для короткого кода: {}", shortCode);
+        logger.info("Поиск оригинального URL для короткого кода: {}", shortCode);
 
-        return urlRepository.findByShortCode(shortCode)
+        Optional<String> result = urlRepository.findByShortCode(shortCode)
                 .map(UrlEntity::getOriginalUrl);
+
+        if (result.isPresent()) {
+            logger.info("Оригинальный URL найден для короткого кода: {}", shortCode);
+        } else {
+            logger.info("Оригинальный URL не найден для короткого кода: {}", shortCode);
+        }
+
+        return result;
     }
 
     private String buildShortUrl(String shortCode) {
         return baseUrl + "/" + shortCode;
     }
 
-    private String generateUniqueShortCode(int desiredLength) {
+    String generateUniqueShortCode(int desiredLength) {
         int attempts = 0;
 
         while (attempts < config.getMaxAttempts()) {
@@ -81,7 +89,7 @@ public class UrlServiceImpl implements UrlService {
             String shortCode = uuid.substring(0, desiredLength);
 
             if (!urlRepository.existsByShortCode(shortCode)) {
-                logger.debug("Уникальный короткий код успешно сгенерирован: {}", shortCode);
+                logger.info("Уникальный короткий код успешно сгенерирован: {}", shortCode);
                 return shortCode;
             }
             attempts++;
@@ -100,7 +108,7 @@ public class UrlServiceImpl implements UrlService {
             throw new IllegalArgumentException("Длина короткого URL не может превышать " + config.getMaxLength() + " символов");
         }
 
-        logger.debug("Длина короткого URL проверена: {} символов", length);
+        logger.info("Длина короткого URL проверена: {} символов", length);
     }
 
     private void validateUrl(String url) {
@@ -116,6 +124,6 @@ public class UrlServiceImpl implements UrlService {
             throw new IllegalArgumentException("Неверный формат URL: " + url);
         }
 
-        logger.debug("URL прошел валидацию: {}", url);
+        logger.info("URL прошел валидацию: {}", url);
     }
 }
