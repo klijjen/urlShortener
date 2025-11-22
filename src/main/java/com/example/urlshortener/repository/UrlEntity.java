@@ -15,7 +15,7 @@ import java.util.*;
 public class UrlEntity {
 
     @Id
-    private UUID id;
+    private final UUID id;
 
     @Column(nullable = false, length = 2048)
     private String originalUrl;
@@ -48,19 +48,15 @@ public class UrlEntity {
         return originalUrl;
     }
 
-    public void setOriginalUrl(String originalUrl) {
-        this.originalUrl = originalUrl;
-    }
-
     public String getShortCode() {
         return shortCode;
     }
 
-    public void setShortCode(String shortCode) {
-        this.shortCode = shortCode;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
     }
 }
