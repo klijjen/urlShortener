@@ -3,7 +3,6 @@ package com.example.urlshortener.service;
 import com.example.urlshortener.config.UrlShortenerConfig;
 import com.example.urlshortener.repository.UrlEntity;
 import com.example.urlshortener.repository.UrlRepository;
-import org.apache.commons.validator.UrlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
