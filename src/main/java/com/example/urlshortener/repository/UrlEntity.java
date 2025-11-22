@@ -3,6 +3,7 @@ package com.example.urlshortener.repository;
 import com.example.urlshortener.Utils;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -30,7 +31,7 @@ public class UrlEntity {
         this.createdAt = LocalDateTime.now();
     }
 
-    public UrlEntity(String originalUrl, String shortCode, LocalDateTime createdAt) {
+    public UrlEntity(String originalUrl, String shortCode) {
         this();
         this.originalUrl = originalUrl;
         this.shortCode = shortCode;
@@ -55,6 +56,7 @@ public class UrlEntity {
     public void setShortCode(String shortCode) {
         this.shortCode = shortCode;
     }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
