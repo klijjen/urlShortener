@@ -105,10 +105,7 @@ class UrlServiceImplTest {
     @DisplayName("Сокращение null URL должно выбрасывать исключение")
     void shortenUrl_WithNullUrl_ShouldThrowException() {
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> urlService.shortenUrl(null)
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> urlService.shortenUrl(null));
 
         assertEquals("URL не может быть пустым или null", exception.getMessage());
     }
@@ -117,10 +114,7 @@ class UrlServiceImplTest {
     @DisplayName("Сокращение пустого URL должно выбрасывать исключение")
     void shortenUrl_WithEmptyUrl_ShouldThrowException() {
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> urlService.shortenUrl("")
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> urlService.shortenUrl(""));
 
         assertEquals("URL не может быть пустым или null", exception.getMessage());
     }
@@ -132,10 +126,7 @@ class UrlServiceImplTest {
         String invalidUrl = "not-a-valid-url";
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> urlService.shortenUrl(invalidUrl)
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> urlService.shortenUrl(invalidUrl));
 
         assertTrue(exception.getMessage().contains("Неверный формат URL"));
     }
@@ -147,10 +138,7 @@ class UrlServiceImplTest {
         String longUrl = "https://example.com/" + "a".repeat(3000);
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> urlService.shortenUrl(longUrl)
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> urlService.shortenUrl(longUrl));
 
         assertEquals("Длина URL превышает максимальный лимит в 2048 символов", exception.getMessage());
     }
@@ -162,10 +150,7 @@ class UrlServiceImplTest {
         int tooShortLength = 2;
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> urlService.shortenUrl(VALID_URL, tooShortLength)
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> urlService.shortenUrl(VALID_URL, tooShortLength));
 
         assertEquals("Длина короткого URL должна быть не менее 4 символов", exception.getMessage());
     }
@@ -177,10 +162,7 @@ class UrlServiceImplTest {
         int tooLongLength = 20;
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> urlService.shortenUrl(VALID_URL, tooLongLength)
-        );
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> urlService.shortenUrl(VALID_URL, tooLongLength));
 
         assertEquals("Длина короткого URL не может превышать 12 символов", exception.getMessage());
     }
@@ -222,10 +204,8 @@ class UrlServiceImplTest {
     @DisplayName("Генерация уникального короткого кода при коллизиях должна генерировать уникальный код")
     void generateUniqueShortCode_WhenCollisionsOccur_ShouldGenerateUniqueCode() {
         // Arrange
-        when(urlRepository.existsByShortCode(anyString()))
-                .thenReturn(true)  // Первые 2 попытки - коллизия
-                .thenReturn(true)
-                .thenReturn(false); // Третья попытка - успех
+        when(urlRepository.existsByShortCode(anyString())).thenReturn(true)  // Первые 2 попытки - коллизия
+                .thenReturn(true).thenReturn(false); // Третья попытка - успех
 
         // Act
         String result = urlService.generateUniqueShortCode(6);
@@ -243,10 +223,7 @@ class UrlServiceImplTest {
         when(urlRepository.existsByShortCode(anyString())).thenReturn(true); // Всегда коллизия
 
         // Act & Assert
-        IllegalStateException exception = assertThrows(
-                IllegalStateException.class,
-                () -> urlService.generateUniqueShortCode(6)
-        );
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> urlService.generateUniqueShortCode(6));
 
         assertTrue(exception.getMessage().contains("Не удалось сгенерировать уникальный короткий код после 10 попыток"));
         verify(urlRepository, times(10)).existsByShortCode(anyString());
