@@ -80,4 +80,13 @@ public class UrlController {
         }
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> healthCheck() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "OK");
+        response.put("service", "URL Shortener");
+        response.put("version", "1.0.0");
+        return ResponseEntity.ok(response);
+    }
+
 }
