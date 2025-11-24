@@ -4,6 +4,7 @@
 
 ## Установка и запуск
 
+### Локальный запуск (разработка)
 
 ```bash
 #Клонирование репозитория
@@ -21,7 +22,20 @@ cd urlShortener
 ./mvnw test
 ```
 
+### Запуск через Docker 
 
+```bash
+# Сборка и запуск всех сервисов
+docker-compose up -d
+```
+```bash
+# Просмотр логов
+docker-compose logs -f url-shortener
+```
+```bash
+# Остановка с удалением данных
+docker-compose down -v
+```
 
 ## Создание короткой ссылки
 
