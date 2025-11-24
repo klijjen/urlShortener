@@ -12,9 +12,6 @@ public class ShortenRequest {
     @Max(value = 12, message = "Длина короткой ссылки не может превышать 12 символа")
     private Integer length;
 
-    public ShortenRequest() {
-    }
-
     public ShortenRequest(String url, Integer length) {
         this.url = url;
         this.length = length;
@@ -30,9 +27,5 @@ public class ShortenRequest {
 
     public Integer getLength() {
         return length;
-    }
-
-    public void setLength(Integer length) {
-        this.length = length;
     }
 }
